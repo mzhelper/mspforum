@@ -1,0 +1,50 @@
+.sliderwrapper{
+position: relative; /*leave as is*/
+overflow: hidden; /*leave as is*/
+/*border: 10px solid navy;*/
+border-bottom-width: 6px;
+width: 100%px; /*width of featured content slider*/
+height: 330px;
+}
+
+.sliderwrapper .contentdiv{
+visibility: hidden; /*leave as is*/
+position: absolute; /*leave as is*/
+left: 0;  /*leave as is*/
+top: 0;  /*leave as is*/
+padding: 0px;
+background: white;
+width: 100%; /*width of content DIVs within slider. Total width should equal slider's inner width (390+5+5=400) */
+height: 100%;
+filter:progid:DXImageTransform.Microsoft.alpha(opacity=100);
+-moz-opacity: 1;
+opacity: 1;
+display: none; z-index: 5; visibility: visible;
+}
+
+.page{
+width: 250px; /*Width of page DIV. Total width should equal slider's outer width (400+10+10=420)*/
+text-align: left;
+margin:280px 0px 0px -460px;
+z-index:99;
+}
+
+.page a:link, .page a:visited{
+padding: 0px 5px;
+margin:0px;
+text-decoration: none; 
+color: white;
+background: #FFF;
+font-weight:bold;
+background:url('../image/nav_aktif.png')no-repeat center;
+width:13px;
+display:block;
+float:left;
+height:14px;
+}
+
+.page a:hover, .page a.selected{
+color: #fdee21;
+background:url('../image/nav.png')no-repeat center -1px;
+/*background-color: #000000;*/
+}
