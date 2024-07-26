@@ -74,7 +74,7 @@ class register extends CI_Controller {
 			
 			$config['upload_path']          = './uploads';
 			$config['allowed_types']        = 'jpg|png|jpeg';
-			$config['max_size']             = 500; //500Kb
+			$config['max_size']             = 1000; //1Mb
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
 			
@@ -114,7 +114,7 @@ class register extends CI_Controller {
 			unset($post['g-recaptcha-response']);
 			$config['upload_path']          = './uploads';
 			$config['allowed_types']        = 'jpg|png|jpeg';
-			$config['max_size']             = 500; //500Kb
+			$config['max_size']             = 1000; //1Mb
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
 			
@@ -149,7 +149,7 @@ class register extends CI_Controller {
 		$data['main_content'] = 'register';
 		$data['param'] = $param;
 		$data['mem'] = GetDataMember();
-		if($param != 9 && $data['mem']['ktp'] > 0) redirect(site_url('register/main/9'));
+		//if($param != 9 && $data['mem']['ktp'] > 0) redirect(site_url('register/main/9'));
 		$this->load->view('template', $data);
 	}
 	
@@ -174,14 +174,19 @@ class register extends CI_Controller {
 	    unset($post['thn']);unset($post['bln']);unset($post['tgl']);
 	    $post['passport_exp'] = $post['thn_p']."-".$post['bln_p']."-".$post['tgl_p'];
 	    unset($post['thn_p']);unset($post['bln_p']);unset($post['tgl_p']);
+	    $post['stay_start'] = $post['thn_d_s']."-".$post['bln_d_s']."-".$post['tgl_d_s'];
+	    unset($post['thn_d_s']);unset($post['bln_d_s']);unset($post['tgl_d_s']);
+	    $post['stay_end'] = $post['thn_d_e']."-".$post['bln_d_e']."-".$post['tgl_d_e'];
+	    unset($post['thn_d_e']);unset($post['bln_d_e']);unset($post['tgl_d_e']);
 	    $post['hp'] = $post['countrycode']." ".$post['hp'];
 	    unset($post['countrycode']);
 	    //$pass = createPassword();
 	    //$post['password'] = md5($this->config->item('encryption_key').$pass);
 			//upload file
+			//print_mz($post);
 			$config['upload_path']          = './uploads';
 			$config['allowed_types']        = 'jpg|png|jpeg|pdf';
-			$config['max_size']             = 500; //500Kb
+			$config['max_size']             = 1000; //1Mb
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
 			// end
@@ -204,12 +209,12 @@ class register extends CI_Controller {
 				$image_ktp = $this->upload->data();
 				$post['ktp'] = $image_ktp['file_name'];
 			}
-			if (!$this->upload->do_upload('surat_tugas')){
+			/*if (!$this->upload->do_upload('surat_tugas')){
 				$post['surat_tugas'] = "";
 			} else {
 				$image_surat_tugas = $this->upload->data();
 				$post['surat_tugas'] = $image_surat_tugas['file_name'];
-			}
+			}*/
 			$post['create_date'] = date("Y-m-d H:i:s");
 			$post['modify_date'] = date("Y-m-d H:i:s");
 			//print_mz($post);

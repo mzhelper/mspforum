@@ -33,8 +33,12 @@ p.lbl_text{margin-bottom:0px;}
 															<?php }
 															?>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Name</label></p>
-																<p class="col-md-8"><input name="firstname" type="text" placeholder="Name" required></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">First Name</label></p>
+																<p class="col-md-8"><input name="firstname" type="text" placeholder="First Name" required></p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Last Name</label></p>
+																<p class="col-md-8"><input name="lastname" type="text" placeholder="Last Name" required></p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail</label></p>
@@ -94,7 +98,7 @@ p.lbl_text{margin-bottom:0px;}
 																<p class="col-md-8"><input name="designation" type="text" placeholder="Designation" required></p>
 															</div>
 															<div class="row">
-																<p class="col-md-4"><label class="col-md-12">Upload Photo ID (do not change)<br>(Filenya only JPG/PNG, max 500Kb)</label></p>
+																<p class="col-md-4"><label class="col-md-12">Upload Official Photo (do not change)<br>(File only JPG/PNG, max 1 Mb)</label></p>
 																<p class="col-md-8"><input type="file" name="photo" required></p>
 															</div>
 															<div class="row">
@@ -116,9 +120,7 @@ p.lbl_text{margin-bottom:0px;}
 																<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
 										                <path fill="#4caf50" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#ccff90" d="M34.602,14.602L21,28.199l-5.602-5.598l-2.797,2.797L21,33.801l16.398-16.402L34.602,14.602z"></path>
 										            </svg>
-										            <p>Create Account Success</p>
-										            <p>Your Account is currently on "pending approval" status by the committee.<br>Please check your email periodically to the next step of the registration process.</p>
-										            <!--<p><a href="<?php echo site_url('register/login');?>" style="color:blue;">Login</a></p>-->
+										            <p>Thank you for your interest in joining HLF MSP 2024. Your account is currently being processed to be activated by the committee. Please, kindly check your email periodically</p>
 															</div>
 													<?php }?>
 												</div>
@@ -135,12 +137,10 @@ p.lbl_text{margin-bottom:0px;}
 								$(".reg_type2").val(7);
 								$(".gov").show();
 								$(".non_gov").hide();
-								$(".surat").show();
 							} else if(vv==4) {
 								$(".reg_type2").val(13);
 								$(".gov").hide();
 								$(".non_gov").show();
-								$(".surat").hide();
 							}
 							$(".reg_type3").val(12);
 						});

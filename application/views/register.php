@@ -21,6 +21,8 @@ p.lbl_text{margin-bottom:0px;}
                         </div>
                         <div class="col-md-12">
                         	<?php
+                        	$typez_reg = GetValue("title","type_reg",array("id"=> "where/".$mem['type_reg']));
+                        	if($mem['type_reg2']) $typez_reg .= " - ".GetValue("title","type_reg",array("id"=> "where/".$mem['type_reg2']));
                         	if($param != 9) {?>
 														<form action="<?php echo site_url('register/submit');?>" method="post" enctype="multipart/form-data" id="registration-form" style="box-shadow:0px 0px 25px #ccc;padding:20px;">
 															<?php
@@ -37,14 +39,15 @@ p.lbl_text{margin-bottom:0px;}
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Registration Type</label></p>
 																<p class="col-md-8">
-																	<select class="reg_type" required>
+																	<input type="text" value="<?php echo $typez_reg;?>" disabled readonly>
+																	<!--<select class="reg_type" required>
 																		<option value="">- Registration Type -</option>
 																		<option value="3">Government</option>
 																		<option value="4">Non-Government</option>
-																	</select>
+																	</select>-->
 																</p>
 															</div>
-															<div class="row type_reg" style="display:none;">
+															<!--<div class="row type_reg" style="display:none;">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">&nbsp;</label></p>
 																<p class="col-md-8">
 																	<select name="type_reg" class="reg_type2" required>
@@ -67,18 +70,18 @@ p.lbl_text{margin-bottom:0px;}
 																		<option value="12">Participant</option>
 																	</select>
 																</p>
-															</div>
-															<div class="row surat" style="display:none;">
-																<p class="col-md-4"><label class="col-md-12">Letter of assignment<br>(File only PDF, max 500Kb)</label></p>
+															</div>-->
+															<!--<div class="row surat" style="display:none;">
+																<p class="col-md-4"><label class="col-md-12">Letter of assignment<br>(File only PDF, max 1 Mb)</label></p>
 																<p class="col-md-8"><input type="file" name="surat_tugas"></p>
-															</div>
+															</div>-->
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Firstname</label></p>
-																<p class="col-md-8"><input name="firstname" type="text" placeholder="Firstname" value="<?php echo $mem['firstname'];?>" required></p>
+																<p class="col-md-8"><input name="firstname" type="text" placeholder="Firstname" value="<?php echo $mem['firstname'];?>" disabled readonly></p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Lastname</label></p>
-																<p class="col-md-8"><input name="lastname" type="text" placeholder="Lastname" required></p>
+																<p class="col-md-8"><input name="lastname" type="text" placeholder="Lastname" value="<?php echo $mem['lastname'];?>" disabled readonly></p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Gender</label></p>
@@ -107,7 +110,7 @@ p.lbl_text{margin-bottom:0px;}
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail</label></p>
 																<p class="col-md-8">
-																	<input name="email" id="email" type="text" placeholder="E-Mail" required value="<?php echo $mem['email'];?>" >
+																	<input name="email" id="email" type="text" placeholder="E-Mail" disabled readonly value="<?php echo $mem['email'];?>" >
 																	<label class="error_e" style="display:none;color:red;">Please enter a valid email address.</label>
 																</p>
 															</div>
@@ -139,13 +142,13 @@ p.lbl_text{margin-bottom:0px;}
 																	for($i=1930;$i<=date("Y")-17;$i++) {
 																		$opt[$i] = $i;
 																	}
-																	echo form_dropdown("thn",$opt);
+																	echo form_dropdown("thn",$opt,1970);
 																	?>
 																</p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Ministry/Institution/Organization</label></p>
-																<p class="col-md-8"><input name="institusi" type="text" placeholder="Ministry/Institution/Organization" value="<?php echo $mem['institusi'];?>" required></p>
+																<p class="col-md-8"><input name="institusi" type="text" placeholder="Ministry/Institution/Organization" value="<?php echo $mem['institusi'];?>" disabled readonly></p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Country</label></p>
@@ -158,12 +161,21 @@ p.lbl_text{margin-bottom:0px;}
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Designation</label></p>
-																<p class="col-md-8"><input name="designation" type="text" placeholder="Designation" value="<?php echo $mem['designation'];?>" ></p>
+																<p class="col-md-8"><input name="designation" type="text" placeholder="Designation" value="<?php echo $mem['designation'];?>" disabled readonly></p>
 															</div>
 															<div class="luarnegriz">
 																<div class="row">
 																	<p class="col-md-4 lbl_text"><label class="col-md-12">Type of Passport</label></p>
-																	<p class="col-md-8"><input name="passport_type" type="text" placeholder="Type of Passport" required></p>
+																	<p class="col-md-8">
+																		<!--<input name="passport_type" type="text" placeholder="Type of Passport" required>-->
+																		<select name="passport_type" required>
+																			<option value="">- Type of Passport -</option>
+																			<option value="Diplomatic dan Offcial">Diplomatic dan Offcial</option>
+																			<option value="Visa Exemption">Visa Exemption</option>
+																			<option value="E-Visa">E-Visa</option>
+																			<option value="VOA">VOA</option>
+																		</select>
+																	</p>
 																</div>
 																<div class="row">
 																	<p class="col-md-4 lbl_text"><label class="col-md-12">Passport Number</label></p>
@@ -231,12 +243,74 @@ p.lbl_text{margin-bottom:0px;}
 																<p class="col-md-8"><input type="text" placeholder="Firstname" required></p>
 															</div>-->
 															<!--<div class="row">
-																<p class="col-md-4"><label class="col-md-12">Upload Photo ID<br>(File only JPG/PNG, max 500Kb)</label></p>
+																<p class="col-md-4"><label class="col-md-12">Upload Photo ID<br>(File only JPG/PNG, max 1 Mb)</label></p>
 																<p class="col-md-8"><input type="file" name="photo" required></p>
 															</div>-->
 															<div class="row">
-																<p class="col-md-4"><label class="col-md-12">Upload Passport / ID Card<br>(File only PDF, max 500Kb)</label></p>
+																<p class="col-md-4"><label class="col-md-12">Upload Passport / ID Card<br>(File only PDF, max 1 Mb)</label></p>
 																<p class="col-md-8"><input type="file" name="ktp" required></p>
+															</div>
+															<div class="row">
+																<p class="col-md-4"><label class="col-md-12">Duration of Stay</label></p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=1;$i<=31;$i++) {
+																		if($i < 10) $opt["0".$i] = "0".$i;
+																		else $opt[$i] = $i;
+																	}
+																	echo form_dropdown("tgl_d_s",$opt,1);
+																	?>
+																</p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=1;$i<=12;$i++) {
+																		if($i < 10) $opt["0".$i] = GetMonth($i);
+																		else $opt[$i] = GetMonth($i);
+																	}
+																	echo form_dropdown("bln_d_s",$opt,9);
+																	?>
+																</p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=date("Y");$i<=date("Y")+15;$i++) {
+																		$opt[$i] = $i;
+																	}
+																	echo form_dropdown("thn_d_s",$opt);
+																	?>
+																</p>
+																<p class="col-md-1 col-xs-12 text-center" style="padding-top:5px;"><small>to</small></p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=1;$i<=31;$i++) {
+																		if($i < 10) $opt["0".$i] = "0".$i;
+																		else $opt[$i] = $i;
+																	}
+																	echo form_dropdown("tgl_d_e",$opt,3);
+																	?>
+																</p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=1;$i<=12;$i++) {
+																		if($i < 10) $opt["0".$i] = GetMonth($i);
+																		else $opt[$i] = GetMonth($i);
+																	}
+																	echo form_dropdown("bln_d_e",$opt,9);
+																	?>
+																</p>
+																<p class="col-md-1 col-xs-12">
+																	<?php
+																	$opt=array();
+																	for($i=date("Y");$i<=date("Y")+15;$i++) {
+																		$opt[$i] = $i;
+																	}
+																	echo form_dropdown("thn_d_e",$opt);
+																	?>
+																</p>
 															</div>
 															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Diatery Option</label></p>
@@ -295,12 +369,12 @@ p.lbl_text{margin-bottom:0px;}
 								$(".reg_type2").val(7);
 								$(".gov").show();
 								$(".non_gov").hide();
-								$(".surat").show();
+								//$(".surat").show();
 							} else if(vv==4) {
 								$(".reg_type2").val(13);
 								$(".gov").hide();
 								$(".non_gov").show();
-								$(".surat").hide();
+								//$(".surat").hide();
 							}
 							$(".reg_type3").val(12);
 						});
