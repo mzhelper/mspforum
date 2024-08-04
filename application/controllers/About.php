@@ -39,7 +39,7 @@ class about extends CI_Controller {
 	{
 		if(!$slug) redirect(lang_url('about/welcome_messages'));
 		$data = GetHeaderFooter();
-		$data['val'] = GetAll("news", array("slug"=> "where/".$slug))->result_array()[0];
+		$data['val'] = GetAll("news", array("is_delete"=> "where/0", "slug"=> "where/".urldecode($slug)))->result_array()[0];
     $data['main_content'] = 'welcome_detail';
 		$this->load->view('template', $data);
 	}
@@ -48,7 +48,7 @@ class about extends CI_Controller {
 	{
 		$data = GetHeaderFooter();
 		$data['main_content'] = 'welcome_detail';
-		$data['val'] = GetAll("leaders",array("slug"=> "where/".$slug))->result_array()[0];
+		$data['val'] = GetAll("leaders",array("is_delete"=> "where/0", "slug"=> "where/".urldecode($slug)))->result_array()[0];
 		$this->load->view('template', $data);
 	}
 	
@@ -64,7 +64,7 @@ class about extends CI_Controller {
 		}
 		$data['warna'] = $warna;
 		$data['opt_tema'] = $tema;
-		$data['val'] = GetAll("speakers",array("slug"=> "where/".$slug))->result_array()[0];
+		$data['val'] = GetAll("speakers",array("is_delete"=> "where/0", "slug"=> "where/".urldecode($slug)))->result_array()[0];
 		$this->load->view('template', $data);
 	}
 	
@@ -80,7 +80,23 @@ class about extends CI_Controller {
 		}
 		$data['warna'] = $warna;
 		$data['opt_tema'] = $tema;
-		$data['val'] = GetAll("member",array("id"=> "where/".$id))->result_array()[0];
+		$data['val'] = GetAll("member",array("is_delete"=> "where/0", "uid"=> "where/".$id))->result_array()[0];
+		$this->load->view('template', $data);
+	}
+	
+	function profile_dao($id)
+	{
+		$data = GetHeaderFooter();
+		$data['main_content'] = 'profile_detail_dao';
+		$data['opt_ruangan'] = GetOptAll("calender_lokasi");
+		$q = GetAll("calender_cat", array("id_parents"=> "order/asc"));
+		foreach($q->result_array() as $r) {
+			$warna[$r['id']] = $r['title_eng'];
+			$tema[$r['id']] = $r['title'];
+		}
+		$data['warna'] = $warna;
+		$data['opt_tema'] = $tema;
+		$data['val'] = GetAll("member_dao",array("is_delete"=> "where/0", "uid"=> "where/".$id))->result_array()[0];
 		$this->load->view('template', $data);
 	}
 }

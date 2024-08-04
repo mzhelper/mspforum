@@ -23,8 +23,15 @@
 	                            $is_login=GetUserID();
 	                            if($is_login){
                               	$cek = GetValue("id","side_event",array("id_member"=> "where/".$is_login,"id_calender"=> "where/".$val['id'],"is_delete"=> "where/0"));
-                              	if($cek) echo "<div class='join_event' style='float:left;'><button class='btn-style1 merah_tipis' rel='".$val['id']."'>Cancel</button></div>";
-                              	else echo "<div class='join_event' style='float:left;'><button class='btn-style1 hijau' rel='".$val['id']."'>Click to Join</button></div>";
+                              	if($cek) echo "<div class='join_event' style='float:left;'><button class='btn-style1 merah_tipis side_merah' rel='".$val['id']."'>Cancel</button></div>";
+                              	else {
+                              		$is_login=$this->session->userdata("dao_event");
+                              		if($is_login) {
+	                              		$cek = GetValue("id","side_event_dao",array("id_member"=> "where/".$is_login,"id_calender"=> "where/".$val['id'],"is_delete"=> "where/0"));
+	                              		if($cek) echo "<div class='join_event' style='float:left;'><button class='btn-style1 merah_tipis side_merah_dao' rel='".$val['id']."'>Cancel</button></div>";
+	                              		else echo "<div class='join_event' style='float:left;'><button class='btn-style1 hijau side_hijau_dao' rel='".$val['id']."'>Click to Join</button></div>";
+	                              	} else echo "<div class='join_event' style='float:left;'><button class='btn-style1 hijau side_hijau' rel='".$val['id']."'>Click to Join</button></div>";
+                              	}
                               }
                               ?>
 	                          </div>
@@ -60,12 +67,24 @@
                         </div>
                         <div class="col-md-12 text-center">
                         	<?php
-                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname from kg_side_event a inner join kg_member b on b.id=a.id_member WHERE a.status='Approve' AND a.id_calender='".$val['id']."'");
+                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname,b.uid from kg_side_event_dao a inner join kg_member_dao b on b.id=a.id_member WHERE a.status='Approve' AND a.id_calender='".$val['id']."'");
                         		foreach($q->result_array() as $r) {
                         			$foto = file_exists("./uploads/".$r['photo']) && $r['photo'] ? $r['photo'] : "foto_default.png";
 								          	?>
 															<div style="float:left;padding-right:10px;">
-																<a href="<?php echo site_url('about/profile/'.$r['id_member']);?>">
+																<a href="<?php echo site_url('about/profile_dao/'.$r['uid']);?>">
+																	<img width="80" height="80" style="border-radius:50%;border:1px solid #ccc;" src="<?php echo base_url().'uploads/'.$foto;?>" title="<?php echo $r['firstname'];?>" alt="<?php echo $r['firstname'];?>">
+																</a>
+															</div>
+														<?php }
+													?>
+													<?php
+                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname,b.uid from kg_side_event a inner join kg_member b on b.id=a.id_member WHERE a.status='Approve' AND a.id_calender='".$val['id']."'");
+                        		foreach($q->result_array() as $r) {
+                        			$foto = file_exists("./uploads/".$r['photo']) && $r['photo'] ? $r['photo'] : "foto_default.png";
+								          	?>
+															<div style="float:left;padding-right:10px;">
+																<a href="<?php echo site_url('about/profile/'.$r['uid']);?>">
 																	<img width="80" height="80" style="border-radius:50%;border:1px solid #ccc;" src="<?php echo base_url().'uploads/'.$foto;?>" title="<?php echo $r['firstname'];?>" alt="<?php echo $r['firstname'];?>">
 																</a>
 															</div>
@@ -77,7 +96,7 @@
             </section>
       </div>
       <script>
-      	$(".hijau").click(function(){
+      	$(".side_hijau").click(function(){
       		var but = $(this);
       		var conf = confirm('Are you sure to join this event?');
       		if(conf) {
@@ -88,13 +107,35 @@
       		}
       	});
       	
-      	$(".merah_tipis").click(function(){
+      	$(".side_merah").click(function(){
       		var but = $(this);
       		var conf = confirm('Are you sure?');
       		if(conf) {
       			var rel = $(this).attr("rel");
       			$.post("<?php echo site_url('programme/add_side/1');?>", {param : rel},  function(response) {
       				if(response=="ok") window.location="<?php echo site_url('programme/agenda_detail/'.$val['slug']);?>";
+						});
+      		}
+      	});
+      	
+      	$(".side_hijau_dao").click(function(){
+      		var but = $(this);
+      		var conf = confirm('Are you sure to join this event?');
+      		if(conf) {
+      			var rel = $(this).attr("rel");
+      			$.post("<?php echo site_url('programme/add_side_dao');?>", {param : rel},  function(response) {
+      				if(response=="ok") window.location="<?php echo site_url('programme/agenda');?>";
+						});
+      		}
+      	});
+      	
+      	$(".side_merah_dao").click(function(){
+      		var but = $(this);
+      		var conf = confirm('Are you sure?');
+      		if(conf) {
+      			var rel = $(this).attr("rel");
+      			$.post("<?php echo site_url('programme/add_side_dao/1');?>", {param : rel},  function(response) {
+      				if(response=="ok") window.location="<?php echo site_url('programme/agenda');?>";
 						});
       		}
       	});

@@ -26,10 +26,27 @@ if (!function_exists('GetUserID')){
 	}
 }
 
+if (!function_exists('GetIDDAO')){	
+	function GetIDDAO()
+	{
+		$CI =& get_instance();
+		return substr($CI->session->userdata("msp_id"),3);
+	}
+}
+
+if (!function_exists('CekDAO')){	
+	function CekDAO()
+	{
+		$CI =& get_instance();
+		return $CI->session->userdata("msp_dao");
+	}
+}
+
 if (!function_exists('GetDataMember')){	
 	function GetDataMember()
 	{
-		$q = GetAll("member",array("id"=> "where/".GetUserID()));
+		if(CekDAO()) $q = GetAll("member_dao",array("id"=> "where/".GetIDDAO()));
+		else $q = GetAll("member",array("id"=> "where/".GetUserID()));
 		$r = $q->result_array();
 		return $r[0];
 	}

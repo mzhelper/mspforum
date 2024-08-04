@@ -10,7 +10,8 @@ class Myaccount extends CI_Controller{
 		permission();
 		$data = GetHeaderFooter();
 		$data['mem'] = GetDataMember();
-		$data['main_content'] = 'myaccount';
+		if($this->session->userdata('msp_dao')) $data['main_content'] = 'myaccount_dao';
+		else $data['main_content'] = 'myaccount';
 		$data['opt_ruangan'] = GetOptAll("calender_lokasi");
 		$q = GetAll("calender_cat", array("id_parents"=> "order/asc"));
 		foreach($q->result_array() as $r) {

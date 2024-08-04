@@ -69,12 +69,24 @@
 								                                    <label class="pt20" style="font-size:14px;padding-bottom:6px;">Recently active attendees</label>
 								                                    <div class="clearfix"></div>
 								                                    <?php
-												                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname from kg_side_event a inner join kg_member b on b.id=a.id_member WHERE a.status='Approve' GROUP By a.id_member ORDER BY a.create_date desc");
+												                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname,b.uid from kg_side_event_dao a inner join kg_member_dao b on b.id=a.id_member WHERE a.status='Approve' GROUP By a.id_member ORDER BY a.create_date desc");
 												                        		foreach($q->result_array() as $r) {
 												                        			$foto = file_exists("./uploads/".$r['photo']) && $r['photo'] ? $r['photo'] : "foto_default.png";
 																				          	?>
 																											<div style="float:left;padding-right:10px;">
-																												<a href="<?php echo site_url('about/profile/'.$r['id_member']);?>">
+																												<a href="<?php echo site_url('about/profile_dao/'.$r['uid']);?>">
+																													<img width="40" height="40" style="border-radius:50%;border:1px solid #ccc;" src="<?php echo base_url().'uploads/'.$foto;?>" title="<?php echo $r['firstname'];?>" alt="<?php echo $r['firstname'];?>">
+																												</a>
+																											</div>
+																										<?php }
+																									?>
+								                                    <?php
+												                        		$q = $this->db->query("select a.id_member,b.photo,b.firstname,b.uid from kg_side_event a inner join kg_member b on b.id=a.id_member WHERE a.status='Approve' GROUP By a.id_member ORDER BY a.create_date desc");
+												                        		foreach($q->result_array() as $r) {
+												                        			$foto = file_exists("./uploads/".$r['photo']) && $r['photo'] ? $r['photo'] : "foto_default.png";
+																				          	?>
+																											<div style="float:left;padding-right:10px;">
+																												<a href="<?php echo site_url('about/profile/'.$r['uid']);?>">
 																													<img width="40" height="40" style="border-radius:50%;border:1px solid #ccc;" src="<?php echo base_url().'uploads/'.$foto;?>" title="<?php echo $r['firstname'];?>" alt="<?php echo $r['firstname'];?>">
 																												</a>
 																											</div>

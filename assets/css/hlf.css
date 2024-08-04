@@ -683,6 +683,8 @@
 	form label{font-size:14px;}
 	.brands .slides li a img{opacity:1 !important;}
 	.menumsp{margin-top:30px;background:#f0f0f0;padding:10px 20px 0px;border-radius:10px;width:96%;}
+	.clone{top:0px !important;}
+	.clone .menumsp{margin-top:0px;background:#f0f0f0;padding:10px 20px 0px;border-radius:0px;width:100%;}
 	.smaller .menumsp{margin-top:0px;background:transparent;padding:0px;border-radius:0px;}
 	#mainmenu li a.active,#mainmenu li a:hover{color:#D20A2D !important;}
 	#mainmenu li a.regz:hover{color:#aaa !important;}

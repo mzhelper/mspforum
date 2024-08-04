@@ -33,35 +33,13 @@ p.lbl_text{margin-bottom:0px;}
 															<?php }
 															?>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">First Name</label></p>
-																<p class="col-md-8"><input name="firstname" type="text" placeholder="First Name" required></p>
-															</div>
-															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Last Name</label></p>
-																<p class="col-md-8"><input name="lastname" type="text" placeholder="Last Name" required></p>
-															</div>
-															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail</label></p>
-																<p class="col-md-8">
-																	<input name="email" id="email" type="text" placeholder="E-Mail" required>
-																	<label class="error_e" style="display:none;color:red;">Please enter a valid email address.</label>
-																</p>
-															</div>
-															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Password</label></p>
-																<p class="col-md-8"><input name="password" minlength="6" type="password" placeholder="Password" required autocomplete="off"></p>
-															</div>
-															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Re-Type Password</label></p>
-																<p class="col-md-8"><input name="re_password" minlength="6" type="password" placeholder="Re-Type Password" required autocomplete="off"></p>
-															</div>
-															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Registration Type</label></p>
 																<p class="col-md-8">
 																	<select class="reg_type" required>
 																		<option value="">- Registration Type -</option>
 																		<option value="3">Government</option>
 																		<option value="4">Non-Government</option>
+																		<option value="5">DAO</option>
 																	</select>
 																</p>
 															</div>
@@ -87,6 +65,35 @@ p.lbl_text{margin-bottom:0px;}
 																		<option value="11">Moderator</option>
 																		<option value="12">Participant</option>
 																	</select>
+																</p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">First Name</label></p>
+																<p class="col-md-8"><input name="firstname" type="text" placeholder="First Name" required></p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Last Name</label></p>
+																<p class="col-md-8"><input name="lastname" type="text" placeholder="Last Name" required></p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail</label></p>
+																<p class="col-md-8">
+																	<input name="email" id="email" type="text" placeholder="E-Mail" required>
+																	<label class="error_e" style="display:none;color:red;">Please enter a valid email address.</label>
+																</p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Password</label></p>
+																<p class="col-md-8">
+																	<input class="psw" name="password" minlength="8" type="password" placeholder="Password" required autocomplete="off">
+																	<label>Min 8 character and must contain of one lower case, upper case, number and special character</label>
+																</p>
+															</div>
+															<div class="row">
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Re-Type Password</label></p>
+																<p class="col-md-8">
+																	<input class="psw2" name="re_password" minlength="8" type="password" placeholder="Re-Type Password" required autocomplete="off">
+																	<!--<label>Min 8 character and must contain of one lower case, upper case, number and special character</label>-->
 																</p>
 															</div>
 															<div class="row">
@@ -130,6 +137,34 @@ p.lbl_text{margin-bottom:0px;}
 					</div>
 					
 					<script>
+						$(".psw").change(function(){
+							var newPassword = $(this).val();
+							var regularExpression  = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/;
+							//alert(newPassword);
+							if(newPassword.length < 8) {
+								alert("Min 8 character");
+							} else if(!regularExpression.test(newPassword)) {
+								alert("The password must contain of one lower case, upper case, number and special character");
+								$(".psw").val("");
+							}
+						});
+						
+						$(".psw2").change(function(){
+							var newPassword = $(this).val();
+							var newPassword_utama = $(".psw").val();
+							var regularExpression  = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/;
+							//alert(newPassword); 
+							if(newPassword.length < 8) {
+								alert("Min 8 character");
+							} else if(!regularExpression.test(newPassword)) {
+								alert("The password must contain of one lower case, upper case, number and special character");
+								$(".psw2").val("");
+							} else if(newPassword_utama != newPassword) {
+								alert("Password & Re-Type Password not match");
+								$(".psw2").val("");
+							}
+						});
+						
 						$(".reg_type").change(function(){
 							$(".type_reg").show();
 							var vv = $(this).val();
@@ -141,7 +176,7 @@ p.lbl_text{margin-bottom:0px;}
 								$(".reg_type2").val(13);
 								$(".gov").hide();
 								$(".non_gov").show();
-							}
+							} else if(vv==5) window.location="<?php echo site_url('register/login/dao');?>";
 							$(".reg_type3").val(12);
 						});
 						$("#email").change(function(){

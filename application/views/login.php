@@ -17,7 +17,10 @@ p.lbl_text{margin-bottom:0px;}
                         <div class="col-md-12">
 													<form action="<?php echo site_url('register/login_submit');?>" method="post" name="contact-form" id="registration-form" style="box-shadow:0px 0px 25px #ccc;padding:20px;">
 														<?php
-														if($err) {?>
+														if($err=="dao") {
+															echo "<div class='row text-center'><label class='col-md-12'>Please insert username and password your DAO Account</label></div>";
+														}
+														if($err && $err != "dao") {?>
 															<div class="row">
 																<div class="col-md-12 lbl_text">
 																	<label class="col-md-12 merah">

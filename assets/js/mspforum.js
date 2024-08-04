@@ -71,6 +71,7 @@
 		} else {
 			jQuery("header.autoshow").removeClass("scrollOn");
 			jQuery("header.autoshow").addClass("scrollOff");
+			jQuery("header").removeClass("clone");
 			vscroll = 0;
 		}
 	}

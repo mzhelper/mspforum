@@ -71,7 +71,7 @@ class programme extends CI_Controller {
 		$data['opt_ruangan'] = GetOptAll("calender_lokasi");
 		$data['opt_tema'] = GetOptAll("calender_cat");
 		if($id > 0) $data['val'] = GetAll("calender",array("id"=> "where/".$id))->result_array()[0];
-		else $data['val'] = GetAll("calender",array("slug"=> "where/".$id))->result_array()[0];
+		else $data['val'] = GetAll("calender",array("slug"=> "where/".$id, "is_delete"=> "where/0"))->result_array()[0];
 		$data['tema'] = "biru";
 		if($data['val']['id_calender_cat']==1) $data['tema'] = "biru";
 		else if($data['val']['id_calender_cat']==2) $data['tema'] = "merah";
@@ -115,6 +115,25 @@ class programme extends CI_Controller {
 		} else {
 			$post = array("id_member"=> $id_mem, "id_calender"=> $id_cal, "status"=> "Pending");
 			if($this->db->insert("side_event", $post)) echo "ok";
+			else echo "no";
+		}
+	}
+	
+	function add_side_dao($param=0)
+	{
+		permission();
+		$id_mem = $this->session->userdata("dao_event");
+		$id_cal = $this->input->post("param");
+		$cek = GetValue("id", "side_event_dao", array("id_calender"=> "where/".$id_cal, "id_member"=> "where/".$id_mem));
+		if($cek) {
+			if($param==1) $post = array("is_delete"=> 1, "status"=> "Reject");
+			else $post = array("is_delete"=> 0, "status"=> "Pending");
+			$this->db->where("id", $cek);
+			if($this->db->update("side_event_dao", $post)) echo "ok";
+			else echo "no";
+		} else {
+			$post = array("id_member"=> $id_mem, "id_calender"=> $id_cal, "status"=> "Pending");
+			if($this->db->insert("side_event_dao", $post)) echo "ok";
 			else echo "no";
 		}
 	}
