@@ -72,7 +72,7 @@
 														</div>
 														<label class="form-label">Password</label>
 														<div class="form-line">
-															<input type="password" name="password" class="form-control" value="<?php echo isset($val['password']) ? $val['password'] : "";?>">
+															<input type="password" name="password" class="psw form-control" value="<?php echo isset($val['password']) ? $val['password'] : "";?>">
 															<input type="hidden" name="password_old" class="form-control" value="<?php echo isset($val['password']) ? $val['password'] : "";?>">
 														</div>
 													</div>
@@ -109,3 +109,16 @@
 </div>
 <script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
 <script src="<?php echo base_url();?>assets/js/editor.js"></script>
+<script>
+$(".psw").change(function(){
+	var newPassword = $(this).val();
+	var regularExpression  = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/;
+	//alert(newPassword);
+	if(newPassword.length < 8) {
+		alert("Min 8 character");
+	} else if(!regularExpression.test(newPassword)) {
+		alert("The password must contain of one lower case, upper case, number and special character");
+		$(".psw").val("");
+	}
+});
+</script>

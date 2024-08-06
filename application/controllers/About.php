@@ -9,6 +9,13 @@ class about extends CI_Controller {
 	
 	function index()
 	{
+		/*$q = GetAll("news", array("is_delete"=> "where/0"));
+		foreach($q->result_array() as $r) {
+			$awal = "./uploads/".$r['image'];
+			$akhir = "./uploads/speakers/".$r['image'];
+			copy($awal,$akhir);
+		}
+		die("OK");*/
 		$this->overview();
 	}
 	
@@ -41,6 +48,14 @@ class about extends CI_Controller {
 		$data = GetHeaderFooter();
 		$data['val'] = GetAll("news", array("is_delete"=> "where/0", "slug"=> "where/".urldecode($slug)))->result_array()[0];
     $data['main_content'] = 'welcome_detail';
+		$this->load->view('template', $data);
+	}
+	
+	function speakers()
+	{
+		$data = GetHeaderFooter();
+		$data['main_content'] = 'speakers';
+		$data['val'] = GetAll("leaders",array("is_delete"=> "where/0", "urutan"=> "order/asc"));
 		$this->load->view('template', $data);
 	}
 	

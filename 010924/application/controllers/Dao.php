@@ -64,7 +64,7 @@ class Dao extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data
@@ -107,6 +107,12 @@ class Dao extends CI_Controller {
     if($admin_id==1) {
     	$ins=array();
 	    $post = $param = $this->input->post();
+	    //Regex Password
+			$cek_psw = preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $post['password']);
+			if(!$cek_psw) {
+				$this->session->set_flashdata('message', 'Password failed');
+				redirect(site_url('dao/dao_detail/0'));
+			}
 			unset($post['id']);
 			$ins['type_reg'] = 5;
 			$ins['modify_user_id'] = $admin_id;
@@ -277,7 +283,7 @@ class Dao extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data

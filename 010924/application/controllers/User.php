@@ -10,7 +10,7 @@ class User extends CI_Controller {
   
 	public function main($param=NULL)
 	{
-	    $not = array("7","8","9","13","14","15","16");
+	    $not = array("7","8","13","14","15","16","17","18","19");
 		if(!in_array($param, $not)) redirect(site_url('home'));
 		permission();
     $data = GetHeaderFooter();
@@ -57,7 +57,7 @@ class User extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data

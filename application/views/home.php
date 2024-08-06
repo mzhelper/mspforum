@@ -104,6 +104,9 @@
 			                  }
 			                  ?>
 		                  </div>
+		                  <div class="text-center">
+		                  	<a href="<?php echo site_url('about/speakers');?>" style="color:#fff;">More</a>
+		                  </div>
 	                  </div>
                 </div>
             </section>

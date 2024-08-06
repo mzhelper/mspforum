@@ -33,7 +33,7 @@ p.lbl_text{margin-bottom:0px;}
 															<?php }
 															?>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Registration Type</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Registration Type *</label></p>
 																<p class="col-md-8">
 																	<select class="reg_type" required>
 																		<option value="">- Registration Type -</option>
@@ -49,11 +49,13 @@ p.lbl_text{margin-bottom:0px;}
 																	<select name="type_reg" class="reg_type2" required>
 																		<option value="7" class="gov">Head of State</option>
 																		<option value="8" class="gov">Head of Delegation</option>
-																		<option value="9" class="gov">Staff</option>
+																		<option value="17" class="gov">Security Officers</option>
 																		<option value="13" class="non_gov">International Organization</option>
-																		<option value="14" class="non_gov">Non-Government Organization</option>
-																		<option value="15" class="non_gov">Private</option>
+																		<option value="14" class="non_gov">Non-Government Organization/Civil Society Organization</option>
+																		<option value="15" class="non_gov">Private Sector</option>
 																		<option value="16" class="non_gov">Philantrophy</option>
+																		<option value="19" class="non_gov">Think Tank/Academician</option>
+																		<option value="18" class="non_gov">Multilateral Development Bank</option>
 																	</select>
 																</p>
 															</div>
@@ -68,44 +70,44 @@ p.lbl_text{margin-bottom:0px;}
 																</p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">First Name</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">First Name *</label></p>
 																<p class="col-md-8"><input name="firstname" type="text" placeholder="First Name" required></p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Last Name</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Last Name *</label></p>
 																<p class="col-md-8"><input name="lastname" type="text" placeholder="Last Name" required></p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">E-Mail *</label></p>
 																<p class="col-md-8">
 																	<input name="email" id="email" type="text" placeholder="E-Mail" required>
 																	<label class="error_e" style="display:none;color:red;">Please enter a valid email address.</label>
 																</p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Password</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Password *</label></p>
 																<p class="col-md-8">
 																	<input class="psw" name="password" minlength="8" type="password" placeholder="Password" required autocomplete="off">
 																	<label>Min 8 character and must contain of one lower case, upper case, number and special character</label>
 																</p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Re-Type Password</label></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Re-Type Password *</label></p>
 																<p class="col-md-8">
 																	<input class="psw2" name="re_password" minlength="8" type="password" placeholder="Re-Type Password" required autocomplete="off">
 																	<!--<label>Min 8 character and must contain of one lower case, upper case, number and special character</label>-->
 																</p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Organization</label></p>
-																<p class="col-md-8"><input name="institusi" type="text" placeholder="Organization" required></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Institution *</label></p>
+																<p class="col-md-8"><input name="institusi" type="text" placeholder="Institution" required></p>
 															</div>
 															<div class="row">
-																<p class="col-md-4 lbl_text"><label class="col-md-12">Designation</label></p>
-																<p class="col-md-8"><input name="designation" type="text" placeholder="Designation" required></p>
+																<p class="col-md-4 lbl_text"><label class="col-md-12">Position *</label></p>
+																<p class="col-md-8"><input name="designation" type="text" placeholder="Position" required></p>
 															</div>
 															<div class="row">
-																<p class="col-md-4"><label class="col-md-12">Upload Official Photo (do not change)<br>(File only JPG/PNG, max 1 Mb)</label></p>
+																<p class="col-md-4"><label class="col-md-12">Upload official photo (for ID Badge) *<br>(max size 1 MB, PNG/JPG)</label></p>
 																<p class="col-md-8"><input type="file" name="photo" required></p>
 															</div>
 															<div class="row">

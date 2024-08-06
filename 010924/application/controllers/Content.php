@@ -10,6 +10,7 @@ class Content extends CI_Controller {
 	
 	function main()
 	{
+	    redirect(site_url('home'));
 		permission();
     $data = GetHeaderFooter();
     $data['main'] = 'content';
@@ -21,6 +22,7 @@ class Content extends CI_Controller {
 	
 	function content_list($trash=0)
   {
+  	redirect(site_url('home'));
   	ini_set('memory_limit', -1);
   	$where="1=1";
   	$kolom = array("","title","slug");
@@ -54,7 +56,7 @@ class Content extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data

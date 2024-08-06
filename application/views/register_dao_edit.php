@@ -61,11 +61,13 @@ p.lbl_text{margin-bottom:0px;}
 															<p class="col-md-8">
 																<select name="type_reg" class="reg_type2" required>
 																	<option value="">- Delegation Type -</option>
-																	<option value="7" <?php echo $mem['type_reg']==7 ? "selected" : "";?>>Head of State</option>
-																	<option value="8" <?php echo $mem['type_reg']==8 ? "selected" : "";?>>Head of Delegation</option>
-																	<option value="5" <?php echo $mem['type_reg']==5 ? "selected" : "";?>>DAO</option>
-																	<option value="6" <?php echo $mem['type_reg']==6 ? "selected" : "";?>>Delegates</option>
-																	<option value="17" <?php echo $mem['type_reg']==17 ? "selected" : "";?>>Security Officers</option>
+																	<option value="7" class="gov" <?php echo $mem['type_reg']==7 ? "selected" : "";?>>Head of State</option>
+																	<option value="8" class="gov" <?php echo $mem['type_reg']==8 ? "selected" : "";?>>Head of Delegation</option>
+																	<option value="5" class="gov" <?php echo $mem['type_reg']==5 ? "selected" : "";?>>DAO</option>
+																	<option value="6" class="gov" <?php echo $mem['type_reg']==6 ? "selected" : "";?>>Delegates</option>
+																	<option value="17" class="gov" <?php echo $mem['type_reg']==17 ? "selected" : "";?>>Security Officers</option>
+																	<option value="13" class="non_gov" <?php echo $mem['type_reg']==13 ? "selected" : "";?>>International Organization</option>
+																	<option value="18" class="non_gov" <?php echo $mem['type_reg']==18 ? "selected" : "";?>>Multilateral Development Bank</option>
 																</select>
 															</p>
 														</div>
@@ -270,7 +272,7 @@ p.lbl_text{margin-bottom:0px;}
 																	?>
 																</p>
 															</div>
-															<!--<div class="row">
+															<div class="row">
 																<p class="col-md-4 lbl_text"><label class="col-md-12">Visa Type</label></p>
 																<p class="col-md-8">
 																	<select name="visa_type" required>
@@ -282,7 +284,7 @@ p.lbl_text{margin-bottom:0px;}
 																		<option value="Calling Visa" <?php echo isset($mem['visa_type']) && $mem['visa_type']=="Calling Visa" ? "selected" : "";?>>Calling Visa</option>
 																	</select>
 																</p>
-															</div>-->
+															</div>
 														</div>
 														<div class="row">
 															<p class="col-md-4"><label class="col-md-12">Upload Photo *<br>(File only JPG/PNG, max 1 Mb)</label></p>
@@ -411,7 +413,19 @@ p.lbl_text{margin-bottom:0px;}
 					</div>
 					
 					<script>
-						/*$(".reg_type").change(function(){
+						var vv = "<?php echo $mem['reg_type'];?>";
+						if(vv==3) {
+							$(".reg_type2").val(7);
+							$(".gov").show();
+							$(".non_gov").hide();
+							//$(".surat").show();
+						} else if(vv==4) {
+							$(".reg_type2").val(13);
+							$(".gov").hide();
+							$(".non_gov").show();
+							//$(".surat").hide();
+						}
+						$(".reg_type").change(function(){
 							$(".type_reg").show();
 							var vv = $(this).val();
 							if(vv==3) {
@@ -426,7 +440,7 @@ p.lbl_text{margin-bottom:0px;}
 								//$(".surat").hide();
 							}
 							$(".reg_type3").val(12);
-						});*/
+						});
 						$("#email").change(function(){
 							var email = $(this).val();
 							if(email.length == 0 || email.indexOf('@') == '-1'|| email.indexOf('.') == '-1'){

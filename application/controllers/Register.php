@@ -102,6 +102,7 @@ class register extends CI_Controller {
 			}
 			$ins['type_reg'] = html_escape($post['type_reg']);
 			$ins['type_reg2'] = html_escape($post['type_reg2']);
+			$ins['reg_type'] = html_escape($post['reg_type']);
 			$ins['firstname'] = html_escape($post['firstname']);
 			$ins['lastname'] = html_escape($post['lastname']);
 			$ins['email'] = html_escape($post['email']);
@@ -177,7 +178,14 @@ class register extends CI_Controller {
 		$data['main_content'] = 'register';
 		$data['param'] = $param;
 		$data['mem'] = GetDataMember();
-		//if($param != 9 && $data['mem']['ktp'] > 0) redirect(site_url('register/main/9'));
+		if($param != 9 && $data['mem']['ktp']) redirect(site_url('register/main/9'));
+		else {
+			foreach($this->session->all_userdata() as $key=> $val) {
+				if(substr($key,0,3)=="reg") {
+					$data['ses_mem'][str_replace("reg_","",$key)] = $val;
+				}
+			}
+		}
 		$this->load->view('template', $data);
 	}
 	
@@ -280,15 +288,27 @@ class register extends CI_Controller {
 			$this->load->library('upload', $config);
 			// end
 			
-			/*if (!$this->upload->do_upload('photo')){
-				//$post['photo'] = "";
-				//$error = array('error' => $this->upload->display_errors());
-	    	//$this->session->set_flashdata('message', 'Photo ID '.$error['error']);
-	    	//redirect(site_url('register'));
-			} else {
-				$image = $this->upload->data();
-				$post['photo'] = $image['file_name'];
-			}*/
+			$this->session->set_userdata("reg_certname", html_escape($post['certname']));
+			$this->session->set_userdata("reg_prefix", html_escape($post['prefix']));
+			$this->session->set_userdata("reg_type_id", html_escape($post['type_id']));
+			$this->session->set_userdata("reg_dob", html_escape($ins['dob']));
+			$this->session->set_userdata("reg_pob", html_escape($post['pob']));
+			$this->session->set_userdata("reg_passport_exp", html_escape($ins['passport_exp']));
+			$this->session->set_userdata("reg_stay_start", html_escape($ins['stay_start']));
+			$this->session->set_userdata("reg_stay_end", html_escape($ins['stay_end']));
+			$this->session->set_userdata("reg_afn", html_escape($post['afn']));
+			$this->session->set_userdata("reg_dfn", html_escape($post['dfn']));
+			$this->session->set_userdata("reg_hp", html_escape($ins['hp']));
+			$this->session->set_userdata("reg_hotel", html_escape($post['hotel']));
+			$this->session->set_userdata("reg_gender", html_escape($post['gender']));
+			$this->session->set_userdata("reg_id_country", html_escape($post['id_country']));
+			$this->session->set_userdata("reg_passport_type", html_escape($post['passport_type']));
+			$this->session->set_userdata("reg_passport", html_escape($post['passport']));
+			$this->session->set_userdata("reg_passport_place", html_escape($post['passport_place']));
+			$this->session->set_userdata("reg_visa_type", html_escape($post['visa_type']));
+			$this->session->set_userdata("reg_kewarganegaraan", html_escape($post['kewarganegaraan']));
+			$this->session->set_userdata("reg_dietary", html_escape($post['dietary']));
+			
 			if (!$this->upload->do_upload('ktp')){
 				$post['ktp'] = "";
 				$error = array('error' => $this->upload->display_errors());
@@ -298,32 +318,31 @@ class register extends CI_Controller {
 				$image_ktp = $this->upload->data();
 				$ins['ktp'] = $image_ktp['file_name'];
 			}
-			/*if (!$this->upload->do_upload('surat_tugas')){
-				$post['surat_tugas'] = "";
-			} else {
-				$image_surat_tugas = $this->upload->data();
-				$post['surat_tugas'] = $image_surat_tugas['file_name'];
-			}*/
 			$ins['create_date'] = date("Y-m-d H:i:s");
 			$ins['modify_date'] = date("Y-m-d H:i:s");
-			//$ins['type_reg'] = html_escape($post['type_reg']);
-			//$ins['type_reg2'] = html_escape($post['type_reg2']);
-			$ins['firstname'] = html_escape($post['firstname']);
-			$ins['lastname'] = html_escape($post['lastname']);
-			$ins['email'] = html_escape($post['email']);
+			$ins['prefix'] = html_escape($post['prefix']);
+			$ins['type_id'] = html_escape($post['type_id']);
+			$ins['certname'] = html_escape($post['certname']);
 			$ins['gender'] = html_escape($post['gender']);
 			$ins['id_country'] = html_escape($post['id_country']);
 			$ins['passport_type'] = html_escape($post['passport_type']);
 			$ins['passport'] = html_escape($post['passport']);
 			$ins['passport_place'] = html_escape($post['passport_place']);
-			$ins['institusi'] = html_escape($post['institusi']);
-			$ins['designation'] = html_escape($post['designation']);
 			$ins['visa_type'] = html_escape($post['visa_type']);
 			$ins['kewarganegaraan'] = html_escape($post['kewarganegaraan']);
 			$ins['dietary'] = html_escape($post['dietary']);
-			//print_mz($post);
+			$ins['hotel'] = html_escape($post['hotel']);
+			$ins['afn'] = html_escape($post['afn']);
+			$ins['dfn'] = html_escape($post['dfn']);
+			$ins['pob'] = html_escape($post['pob']);
 			$this->db->where("id", GetUserID());
-			if($this->db->update("member", $post)) {
+			if($this->db->update("member", $ins)) {
+				//Hapus Session
+				foreach($this->session->all_userdata() as $key=> $val) {
+					if(substr($key,0,3)=="reg") {
+						$this->session->unset_userdata($key);
+					}
+				}
 	      redirect(site_url('register/main/9'));
 			} else {
 	  		$this->session->set_flashdata("message", "Registration Failed");
@@ -428,7 +447,7 @@ class register extends CI_Controller {
 			$ins['passport_place'] = html_escape($post['passport_place']);
 			$ins['institusi'] = html_escape($post['institusi']);
 			$ins['designation'] = html_escape($post['designation']);
-			//$ins['visa_type'] = html_escape($post['visa_type']);
+			$ins['visa_type'] = html_escape($post['visa_type']);
 			$ins['kewarganegaraan'] = html_escape($post['kewarganegaraan']);
 			$ins['dietary'] = html_escape($post['dietary']);
 			$ins['hotel'] = html_escape($post['hotel']);

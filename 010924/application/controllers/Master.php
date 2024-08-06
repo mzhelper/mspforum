@@ -64,7 +64,7 @@ class Master extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data
@@ -186,7 +186,7 @@ class Master extends CI_Controller {
 	  }
 	  
 	  $output = array(
-	                  "draw" => $_POST['draw'],
+	                  "draw" => html_escape($_POST['draw']),
 	                  "recordsTotal" => $this->db->query($query_no_limit)->num_rows(),
 	                  "recordsFiltered" => $this->db->query($query_no_limit)->num_rows(),
 	                  "data" => $data

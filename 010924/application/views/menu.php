@@ -95,11 +95,13 @@
 		           		<ul class="treeview-menu">
 			                <li><a href="<?php echo site_url('akun/main/7');?>"><i class="icon icon-angle-right s-18"></i>Head of State</a></li>
 			                <li><a href="<?php echo site_url('akun/main/8');?>"><i class="icon icon-angle-right s-18"></i>Head of Delegation</a></li>
-			                <li><a href="<?php echo site_url('akun/main/9');?>"><i class="icon icon-angle-right s-18"></i>Staff</a></li>
+			                <li><a href="<?php echo site_url('akun/main/17');?>"><i class="icon icon-angle-right s-18"></i>Security Officers</a></li>
 			                <li><a href="<?php echo site_url('akun/main/13');?>"><i class="icon icon-angle-right s-18"></i>International Organization</a></li>
 			                <li><a href="<?php echo site_url('akun/main/14');?>"><i class="icon icon-angle-right s-18"></i>Non-Government Organization</a></li>
-			                <li><a href="<?php echo site_url('akun/main/15');?>"><i class="icon icon-angle-right s-18"></i>Private</a></li>
+			                <li><a href="<?php echo site_url('akun/main/15');?>"><i class="icon icon-angle-right s-18"></i>Private Sector</a></li>
 			                <li><a href="<?php echo site_url('akun/main/16');?>"><i class="icon icon-angle-right s-18"></i>Philantrophy</a></li>
+			                <li><a href="<?php echo site_url('akun/main/19');?>"><i class="icon icon-angle-right s-18"></i>Think Tank/Academician</a></li>
+			                <li><a href="<?php echo site_url('akun/main/18');?>"><i class="icon icon-angle-right s-18"></i>Multilateral Development Bank</a></li>
 			            </ul>
 			          </li>
 			          <li>
@@ -110,11 +112,13 @@
 		           		<ul class="treeview-menu">
 			                <li><a href="<?php echo site_url('user/main/7');?>"><i class="icon icon-angle-right s-18"></i>Head of State</a></li>
 			                <li><a href="<?php echo site_url('user/main/8');?>"><i class="icon icon-angle-right s-18"></i>Head of Delegation</a></li>
-			                <li><a href="<?php echo site_url('user/main/9');?>"><i class="icon icon-angle-right s-18"></i>Staff</a></li>
+			                <li><a href="<?php echo site_url('user/main/17');?>"><i class="icon icon-angle-right s-18"></i>Security Officers</a></li>
 			                <li><a href="<?php echo site_url('user/main/13');?>"><i class="icon icon-angle-right s-18"></i>International Organization</a></li>
 			                <li><a href="<?php echo site_url('user/main/14');?>"><i class="icon icon-angle-right s-18"></i>Non-Government Organization</a></li>
-			                <li><a href="<?php echo site_url('user/main/15');?>"><i class="icon icon-angle-right s-18"></i>Private</a></li>
+			                <li><a href="<?php echo site_url('user/main/15');?>"><i class="icon icon-angle-right s-18"></i>Private Sector</a></li>
 			                <li><a href="<?php echo site_url('user/main/16');?>"><i class="icon icon-angle-right s-18"></i>Philantrophy</a></li>
+			                <li><a href="<?php echo site_url('user/main/19');?>"><i class="icon icon-angle-right s-18"></i>Think Tank/Academician</a></li>
+			                <li><a href="<?php echo site_url('user/main/18');?>"><i class="icon icon-angle-right s-18"></i>Multilateral Development Bank</a></li>
 			            </ul>
 			          </li>
 			          <li class="treeview">
